@@ -3,9 +3,11 @@
   "set": "psc-0.12.0",
   "source": "https://github.com/purescript/package-sets.git",
   "depends": [
+    "foldable-traversable",
+    "integers",
+    "psci-support",
     "console",
     "maybe",
-    "strings",
-    "foldable-traversable"
+    "strings"
   ]
 }
