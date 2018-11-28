@@ -4,6 +4,7 @@ import Prelude
 
 import Data.Foldable (foldl)
 import Global as Global
+import Math (pi)
 import Math as Math
 
 data Point = Point
@@ -114,3 +115,8 @@ bounds = foldl combine emptyBounds
   where
   combine :: Bounds -> Shape -> Bounds
   combine b shape = union (shapeBounds shape) b
+
+area :: Shape -> Number
+area (Circle _ r)      = pi * r * r
+area (Rectangle _ w h) = w * h
+area _                 = 0.0
