@@ -64,14 +64,14 @@ validatePerson :: Person -> V Errors Person
 validatePerson (Person o) =
   person <$> (nonEmpty "First Name" o.firstName *> pure o.firstName)
          <*> (nonEmpty "Last Name"  o.lastName  *> pure o.lastName)
-         <*> validateAddress o.homeAddress
+         <*> (traverse validateAddress o.homeAddress)
          <*> (arrayNonEmpty "Phone Numbers" o.phones *> traverse validatePhoneNumber o.phones)
 
 validatePersonAdo :: Person -> V Errors Person
 validatePersonAdo (Person o) = ado
   firstName   <- (nonEmpty "First Name" o.firstName *> pure o.firstName)
   lastName    <- (nonEmpty "Last Name"  o.lastName  *> pure o.lastName)
-  address     <- validateAddress o.homeAddress
+  address     <- (traverse validateAddress o.homeAddress)
   numbers     <- (arrayNonEmpty "Phone Numbers" o.phones *> traverse validatePhoneNumber o.phones)
   in person firstName lastName address numbers
 
